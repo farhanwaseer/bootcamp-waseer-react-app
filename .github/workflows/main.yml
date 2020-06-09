@@ -21,12 +21,12 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Setup Node.js enverironment
-      uses: action/setup-node@v1.4.2
+      uses: action/setup-node@v2-beta
       with:
         version: 12
        
     - name: GitHub Action for Yarn
-      uses: Borales/action-yarn@2.1.0
+      uses: Borales/actions-yarn@2.1.0
       with:
         # Yarn command
         cmd: install # npm install/ yarn install
