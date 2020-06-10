@@ -20,22 +20,22 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - name: Setup Node.js enverironment
-      uses: action/setup-node@v2-beta
+    - name: Install NodeJS
+      uses: actions/setup-node@v2-beta
       with:
-        version: 12
-       
-    - name: GitHub Action for Yarn
-      uses: Borales/actions-yarn@2.1.0
+        node-version: 12
+    
+    # Install Yarn
+    - uses: borales/actions-yarn@v2.0.0
       with:
-        # Yarn command
-        cmd: install # npm install/ yarn install
-        
-    - name: Creating build
+        cmd: install # will run  'yarn install' command
+    
+    # Build React App with Yarn
+    - name: Build React App
       run: yarn build
+    # Install Surge
+    - name: Install Surge
+      run: npm install --global surge
     
-    - name: installimg surge
-      run: npm install -g surge
-    
-    - name: deploying on surge
-      run: surge ./build http://bootcamp-waseer-app2.surge.sh/ --token ${{secrets.WASEERAPP_SURGE_TOKEN}}
+    - name: Deploy React App to Surge
+      run: surge ./build bootcamp-waseer-app2.surge.sh --token ${{ secrets.WASEERAPP_SURGE_TOKEN }}
